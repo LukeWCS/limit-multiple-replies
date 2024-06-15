@@ -1,0 +1,10 @@
+{
+    "stable": {
+        "3.3": {
+            "current": "0.0.0",
+            "announcement": "https://github.com/LukeWCS/limit-multiple-replies/releases",
+            "eol": null,
+            "security": false
+        }
+    }
+}
