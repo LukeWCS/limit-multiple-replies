@@ -1,0 +1,17 @@
+.limitreplies_hint {
+	margin: 0.5em 0;
+	padding: 0.5em;
+	border-radius: 5px;
+	font-size: 1.2em;
+	border: 1px solid skyblue;
+	background-color: aliceblue;
+}
+
+.limitreplies_hint .icon {
+	color: dodgerblue;
+}
+
+a[href*="mode=quote"],
+a[href*="mode=reply"] {
+	opacity: 0.5;
+}
