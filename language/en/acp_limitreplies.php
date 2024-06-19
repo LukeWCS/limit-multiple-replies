@@ -46,11 +46,13 @@ $lang = array_merge($lang, [
 	'LIMITREPLIES_SETTINGS_TITLE'		=> 'Settings',
 	'LIMITREPLIES_ENABLE'				=> 'Enable function',
 	'LIMITREPLIES_ENABLE_EXPLAIN'		=> 'With this switch you can deactivate the functionality without having to deactivate the extension completely.',
-	'LIMITREPLIES_WAIT_TIME'			=> 'Waiting time',
-	'LIMITREPLIES_WAIT_TIME_EXPLAIN'	=> 'Here you can specify after which waiting time a new reply is allowed if the last post was from the same user. This value is also displayed in the explanation.',
+	'LIMITREPLIES_WAIT_TIME'			=> 'Waiting period between two posts',
+	'LIMITREPLIES_WAIT_TIME_EXPLAIN'	=> 'Here you can specify after which waiting period a new reply is allowed in the topic if the last post was made by the same user. This value is also displayed in the explanation.',
 	'LIMITREPLIES_MINUTES'				=> 'minutes',
-	'LIMITREPLIES_SHOW_HINT'			=> 'Show explanation',
-	'LIMITREPLIES_SHOW_HINT_EXPLAIN'	=> 'If this switch is activated, the explanation is displayed permanently. Otherwise only when the "Reply" button is clicked.',
+	'LIMITREPLIES_HINT_MODE'			=> 'Show explanation',
+	'LIMITREPLIES_HINT_MODE_EXPLAIN'	=> 'With this selection you can specify how the explanation should be displayed when the lock is active. The “On click” option refers to the reply and quote buttons, where the explanation is displayed with the usual phpBB info popup. With the “Always” option, the explanation is permanently displayed below the reply buttons.',
+	'LIMITREPLIES_HINT_MODE_ONCLICK'	=> 'On click',
+	'LIMITREPLIES_HINT_MODE_ALWAYS'		=> 'Always',
 
 	'LIMITREPLIES_MSG_SETTINGS_SAVED'	=> 'Limit Multiple Replies: Settings saved successfully',
 ]);

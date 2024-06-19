@@ -40,7 +40,7 @@ if (empty($lang) || !is_array($lang))
 // ’ « » “ ” … „ “
 
 $lang = array_merge($lang, [
-	'LIMITREPLIES_MSG_REPLY_DENIED'	=> 'Solange der letzte Beitrag in diesem Thema von dir stammt und jünger ist als %1$s, kannst du erst ab %2$s erneut antworten.',
+	'LIMITREPLIES_MSG_REPLY_DENIED'	=> 'Solange der letzte Beitrag in diesem Thema von dir stammt und jünger ist als <strong>%1$s</strong>, kannst du erst ab <strong>%2$s</strong> erneut antworten.',
 	'LIMITREPLIES_MINUTES_PLURAL'	=> [
 		1							=> '1 Minute',
 		2							=> '%u Minuten',

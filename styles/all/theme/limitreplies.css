@@ -11,6 +11,10 @@
 	color: dodgerblue;
 }
 
+.limitreplies_lock {
+	cursor: not-allowed;
+}
+
 a[href*="mode=quote"],
 a[href*="mode=reply"] {
 	opacity: 0.5;

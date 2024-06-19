@@ -13,5 +13,15 @@
 {% if LIMITREPLIES_MESSAGE is defined %}
 	{% INCLUDEJS '@lukewcs_limitreplies/limitreplies.js' %}
 	{% INCLUDECSS '@lukewcs_limitreplies/limitreplies.css' %}
-	{% INCLUDE '@lukewcs_limitreplies/show_message.html' %}
+	{% if LIMITREPLIES_SELECT_HINT_MODE == 2 %}
+		{% INCLUDE '@lukewcs_limitreplies/show_message.html' %}
+	{% endif %}
+
+	<script>
+		const limitreplies = Object.freeze({
+			MessageTitle	: {{ lang('INFORMATION')|json_encode }},
+			MessageText		: {{ LIMITREPLIES_MESSAGE|json_encode }},
+			HintMode		: {{ LIMITREPLIES_SELECT_HINT_MODE|json_encode }},
+		});
+	</script>
 {% endif %}

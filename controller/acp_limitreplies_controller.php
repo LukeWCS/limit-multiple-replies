@@ -53,9 +53,9 @@ class acp_limitreplies_controller
 		{
 			$this->check_form_key_error('lukewcs_limitreplies');
 
-			$this->config->set('limitreplies_switch_enable'		, $this->request->variable('limitreplies_switch_enable'		, '0'));
-			$this->config->set('limitreplies_number_wait_time'	, $this->request->variable('limitreplies_number_wait_time'	, '60'));
-			$this->config->set('limitreplies_switch_show_hint'	, $this->request->variable('limitreplies_switch_show_hint'	, '0'));
+			$this->config->set('limitreplies_switch_enable'		, $this->request->variable('limitreplies_switch_enable'		, 0));
+			$this->config->set('limitreplies_number_wait_time'	, $this->request->variable('limitreplies_number_wait_time'	, 60));
+			$this->config->set('limitreplies_select_hint_mode'	, $this->request->variable('limitreplies_select_hint_mode'	, 1));
 
 			trigger_error($this->language->lang('LIMITREPLIES_MSG_SETTINGS_SAVED') . adm_back_link($this->u_action));
 		}
@@ -67,11 +67,14 @@ class acp_limitreplies_controller
 		}
 
 		$this->template->assign_vars([
-			'LIMITREPLIES_NOTES'			=> (array) $notes,
+			'LIMITREPLIES_NOTES'					=> (array) $notes,
 
-			'LIMITREPLIES_SWITCH_ENABLE'	=> (bool) $this->config['limitreplies_switch_enable'],
-			'LIMITREPLIES_NUMBER_WAIT_TIME'	=> (int) $this->config['limitreplies_number_wait_time'],
-			'LIMITREPLIES_SWITCH_SHOW_HINT'	=> (bool) $this->config['limitreplies_switch_show_hint'],
+			'LIMITREPLIES_SWITCH_ENABLE'			=> (bool) $this->config['limitreplies_switch_enable'],
+			'LIMITREPLIES_NUMBER_WAIT_TIME'			=> (int) $this->config['limitreplies_number_wait_time'],
+			'LIMITREPLIES_SELECT_HINT_MODES'		=> $this->select_struct($this->config['limitreplies_select_hint_mode'], [
+				['LIMITREPLIES_HINT_MODE_ONCLICK'	, 1],
+				['LIMITREPLIES_HINT_MODE_ALWAYS'	, 2],
+			]),
 		]);
 
 		add_form_key('lukewcs_limitreplies');
@@ -130,5 +133,22 @@ class acp_limitreplies_controller
 		}
 
 		return $lang_outdated_msg;
+	}
+
+	private function select_struct($value, array $options_params): array
+	{
+		$is_array_value = is_array($value);
+		$options = [];
+		foreach ($options_params as $params)
+		{
+			$options[] = [
+				'label'		=> $params[0],
+				'value'		=> $params[1],
+				'bold'		=> $params[2] ?? false,
+				'selected'	=> $is_array_value ? in_array($params[1], $value) : $params[1] == $value,
+			];
+		}
+
+		return $options;
 	}
 }

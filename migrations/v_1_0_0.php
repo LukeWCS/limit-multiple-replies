@@ -28,9 +28,9 @@ class v_1_0_0 extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		return [
-			['config.add', ['limitreplies_switch_enable'	, '0']],
-			['config.add', ['limitreplies_number_wait_time'	, '60']],
-			['config.add', ['limitreplies_switch_show_hint'	, '0']],
+			['config.add', ['limitreplies_switch_enable'	, 0]],
+			['config.add', ['limitreplies_number_wait_time'	, 60]],
+			['config.add', ['limitreplies_select_hint_mode'	, 1]],
 
 			['module.add', [
 				'acp',

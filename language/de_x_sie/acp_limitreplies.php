@@ -46,11 +46,13 @@ $lang = array_merge($lang, [
 	'LIMITREPLIES_SETTINGS_TITLE'		=> 'Einstellungen',
 	'LIMITREPLIES_ENABLE'				=> 'Funktion aktivieren',
 	'LIMITREPLIES_ENABLE_EXPLAIN'		=> 'Mit diesem Schalter können Sie die Funktionalität deaktivieren, ohne die Erweiterung komplett deaktivieren zu müssen.',
-	'LIMITREPLIES_WAIT_TIME'			=> 'Wartezeit',
-	'LIMITREPLIES_WAIT_TIME_EXPLAIN'	=> 'Hier können Sie festlegen, nach welcher Wartezeit eine erneute Antwort erlaubt ist, wenn der letzte Beitrag vom selben Benutzer stammt. Dieser Wert wird auch in der Erklärung angezeigt.',
+	'LIMITREPLIES_WAIT_TIME'			=> 'Wartezeit zwischen zwei Beiträgen',
+	'LIMITREPLIES_WAIT_TIME_EXPLAIN'	=> 'Hier können Sie festlegen, nach welcher Wartezeit eine erneute Antwort im Thema erlaubt ist, wenn der letzte Beitrag vom selben Benutzer stammt. Dieser Wert wird auch in der Erklärung angezeigt.',
 	'LIMITREPLIES_MINUTES'				=> 'Minuten',
-	'LIMITREPLIES_SHOW_HINT'			=> 'Erklärung anzeigen',
-	'LIMITREPLIES_SHOW_HINT_EXPLAIN'	=> 'Wenn dieser Schalter aktiviert ist, wird die Erklärung dauerhaft angezeigt. Ansonsten nur, wenn der „Antworten“ Button angeklickt wird.',
+	'LIMITREPLIES_HINT_MODE'			=> 'Erklärung anzeigen',
+	'LIMITREPLIES_HINT_MODE_EXPLAIN'	=> 'Mit dieser Auswahl kann festgelegt werden, auf welche Weise die Erklärung bei aktiver Sperre angezeigt werden soll. Die Option „Bei Klick“ bezieht sich auf die Antworten- und Zitat-Buttons, bei denen die Erklärung mit dem gewohnten phpBB Info-Popup angezeigt wird. Bei der Option „Immer“ wird die Erklärung dauerhaft unterhalb der Antworten-Buttons angezeigt.',
+	'LIMITREPLIES_HINT_MODE_ONCLICK'	=> 'Bei Klick',
+	'LIMITREPLIES_HINT_MODE_ALWAYS'		=> 'Immer',
 
 	'LIMITREPLIES_MSG_SETTINGS_SAVED'	=> 'Mehrfachantworten begrenzen: Einstellungen erfolgreich gespeichert',
 ]);

@@ -14,16 +14,20 @@
 
 'use strict';
 
+const HintModeOnClick	= 1;
+const HintModeAlways	= 2;
+
 $(function () {
-	$('a[href*="mode=quote"],a[href*="mode=reply"]').on('click', function(e) {
+	$('a[href*="mode=quote"],a[href*="mode=reply"]').on('click', function (e) {
 		e.preventDefault();
+		if (limitreplies.HintMode == HintModeOnClick) {
+			phpbb.alert(limitreplies.MessageTitle, limitreplies.MessageText);
+		}
 	});
-	$('.bar-top a[href*="mode=reply"]').on('click', function(e) {
-		$('.bar-top + .limitreplies_hint').show(300);
-	});
-	$('.bar-bottom a[href*="mode=reply"]').on('click', function(e) {
-		$('.bar-bottom + .limitreplies_hint').show(300);
-	});
+
+	if (limitreplies.HintMode == HintModeAlways) {
+		$('a[href*="mode=quote"],a[href*="mode=reply"]').addClass('limitreplies_lock');
+	};
 });
 
 })(jQuery);

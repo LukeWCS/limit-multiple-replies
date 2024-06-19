@@ -41,18 +41,18 @@
 				<span>{{ lang('LIMITREPLIES_WAIT_TIME_EXPLAIN') }}</span>
 			</dt>
 			<dd>
-				{{ _self.number('limitreplies_number_wait_time', LIMITREPLIES_NUMBER_WAIT_TIME, 1, 9999) }}
+				{{ _self.number('limitreplies_number_wait_time', LIMITREPLIES_NUMBER_WAIT_TIME, 1, 999) }}
 				{{ lang('LIMITREPLIES_MINUTES') }}
 			</dd>
 		</dl>
 
 		<dl>
 			<dt>
-				<label>{{ lang('LIMITREPLIES_SHOW_HINT') ~ lang('COLON') }}</label><br>
-				<span>{{ lang('LIMITREPLIES_SHOW_HINT_EXPLAIN') }}</span>
+				<label>{{ lang('LIMITREPLIES_HINT_MODE') ~ lang('COLON') }}</label><br>
+				<span>{{ lang('LIMITREPLIES_HINT_MODE_EXPLAIN') }}</span>
 			</dt>
 			<dd>
-				{{ _self.switch('limitreplies_switch_show_hint', LIMITREPLIES_SWITCH_SHOW_HINT, switch_type) }}
+				{{ _self.select('limitreplies_select_hint_mode', LIMITREPLIES_SELECT_HINT_MODES) }}
 			</dd>
 		</dl>
 
@@ -92,6 +92,20 @@
 		(step !== null ? ' step="' ~ step ~ '"') ~
 		(placeholder !== null ? ' placeholder="' ~ placeholder ~ '"')
 	}}>
+{%- endmacro %}
+
+{% macro select(name, options, multiple = null, size = null) -%}
+	<select name="{{ name }}{{ multiple ? '[]' }}"{{
+		(size !== null ? ' size="' ~ size ~ '"') ~
+		(multiple ? ' multiple')
+	}}>
+		{% for opt in options %}
+			<option value="{{ opt.value }}"{{
+				(opt.bold ? ' class="sep"') ~
+				(opt.selected ? ' selected')
+			}}>{{ lang(opt.label) }}</option>
+		{% endfor %}
+	</select>
 {%- endmacro %}
 
 {% macro notes(notes) %}

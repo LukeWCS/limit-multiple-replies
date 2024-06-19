@@ -81,7 +81,7 @@ class listener implements EventSubscriberInterface
 			$this->template->assign_vars([
 				'S_QUICK_REPLY' 				=> false,
 				'LIMITREPLIES_MESSAGE' 			=> (string) $this->get_message($locked_until_time),
-				'LIMITREPLIES_SWITCH_SHOW_HINT'	=> (bool) $this->config['limitreplies_switch_show_hint'],
+				'LIMITREPLIES_SELECT_HINT_MODE'	=> (int) $this->config['limitreplies_select_hint_mode'],
 			]);
 		}
 	}
@@ -131,19 +131,19 @@ class listener implements EventSubscriberInterface
 		return $nru_group_id !== false ? $nru_group_id : null;
 	}
 
-	private function get_last_unapproved_post_row(int $topic_id, int $poster_id): ?array
+	private function get_last_unapproved_post(int $topic_id, int $poster_id): ?array
 	{
-		$sql = 'SELECT *
+		$sql = 'SELECT post_id, post_time
 				FROM ' . POSTS_TABLE . '
 				WHERE topic_id = ' . (int) $topic_id . '
 					AND poster_id = ' . (int) $poster_id . '
 					AND post_visibility = 0
 				ORDER BY post_time DESC LIMIT 1';
 		$result = $this->db->sql_query($sql);
-		$row = $this->db->sql_fetchrow($result);
+		$post_row = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
 
-		return $row !== false ? $row : null;
+		return $post_row !== false ? $post_row : null;
 	}
 
 	private function get_lock_time(array $topic_data): int
@@ -161,30 +161,31 @@ class listener implements EventSubscriberInterface
 		$locked_until_time = 0;
 		$nru_group_id = $this->get_nru_group_id();
 
-		// There are posts in the topic's queue and the user is an NRU
+		// Check whether there are posts in the queue of the topic and the user is an NRU.
 		if ($topic_data['topic_posts_unapproved']
 			&& $nru_group_id !== null && group_memberships($nru_group_id, $this->user->data['user_id'], true)
 		)
 		{
 // var_dump('IF #1');
-			$last_unapproved_post_row = $this->get_last_unapproved_post_row($topic_data['topic_id'], $this->user->data['user_id']);
+			$last_unapproved_post_row = $this->get_last_unapproved_post($topic_data['topic_id'], $this->user->data['user_id']);
 // var_dump('last_unapproved_post_row', $last_unapproved_post_row !== null);
 // var_dump('unapproved:post_id', $last_unapproved_post_row['post_id'] ?? null);
-// var_dump('unapproved:poster_id', $last_unapproved_post_row['poster_id'] ?? null);
 // var_dump('unapproved:post_time', $last_unapproved_post_row['post_time'] ?? null);
 
+			// Check if the timestamp of the user's last post in the queue is greater than the timestamp of the last visible post.
 			if ($last_unapproved_post_row !== null && $last_unapproved_post_row['post_time'] > $topic_data['topic_last_post_time'])
 			{
 // var_dump('IF #2');
 				$locked_until_time = $last_unapproved_post_row['post_time'] + $this->wait_time;
 			}
+			// Check if the last visible post was from the same user.
 			else if ($topic_data['topic_last_poster_id'] == $this->user->data['user_id'])
 			{
 // var_dump('IF #3');
 				$locked_until_time = $topic_data['topic_last_post_time'] + $this->wait_time;
 			}
 		}
-		// There are no posts in the topic's queue, or the user is not an NRU
+		// Check if the last visible post was from the same user.
 		else if ($topic_data['topic_last_poster_id'] == $this->user->data['user_id'])
 		{
 // var_dump('IF #4');

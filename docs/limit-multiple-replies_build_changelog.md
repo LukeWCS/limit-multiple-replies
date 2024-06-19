@@ -1,3 +1,25 @@
+#### 1.0.0-b2
+* ACP Modul:
+  * Den Schalter bei "Erklärung anzeigen" durch ein Auswahlmenü ersetzt, damit diese Einstellung intuitiver und gleichzeitig flexibler wird.
+  * Twig Makro `select()` von FAR übernommen, mit dem Auswahlmenüs in Templates einfacher und effizienter realisiert werden können.
+* ACP Controller:
+  * Controller an das neue Auswahlmenü angepasst.
+  * Funktion `select_struct` von FAR übernommen zum Bauen einer Select Struktur fürs Template.
+* Foren Frontend:
+  * Bei der Klick-abhängigen Anzeige der Erklärung wird nicht mehr die bisherige Variante für die permanente Anzeige verwendet, sondern die phpBB Popup Funktion `phpbb.alert()`. Dadurch wurde es jetzt möglich, dass man auch bei den Zitat-Buttons die Erklärung anzeigen kann.
+  * Bei der permanenten Anzeige der Erklärung wird jetzt ein `not-allowed` Pointer bei den Antwort- und Zitat-Buttons verwendet. [Vorschlag von Udo]
+* Listener:
+  * Generierung der Template Variable für den Erklärung-Modus wurde auf das neue Auswahlmenü umgestellt.
+  * Bei `get_last_unapproved_post` werden jetzt nur noch relevante Felder aus der DB abgefragt, nicht mehr der komplette Datensatz des Beitrags.
+* JS:
+  * Code an die Änderungen bei den Buttons und der Erklärung angepasst.
+* Migration:
+  * Die Migration 1.0.0 musste geändert werden, da die Variable für den Erklärung-Modus jetzt ein Menü ist, kein Schalter mehr. Also vorher b1 deinstallieren.
+* Sprachdateien:
+  * Texte überarbeitet.
+  * 2 Variablen umbenannt.
+  * 2 neue Variablen für das Auswahlmenü.
+
 #### 1.0.0-b1
 * Erste interne Testversion.
 * Online Versionsprüfung bereits eingebaut und im Repo eingerichtet. Die VP zeigt jedoch während der Beta immer, dass die Version aktuell ist.
