@@ -67,11 +67,11 @@ class acp_limitreplies_controller
 		}
 
 		$this->template->assign_vars([
-			'LIMITREPLIES_NOTES'					=> (array) $notes,
+			'LIMITREPLIES_NOTES'					=> $notes,
 
 			'LIMITREPLIES_SWITCH_ENABLE'			=> (bool) $this->config['limitreplies_switch_enable'],
 			'LIMITREPLIES_NUMBER_WAIT_TIME'			=> (int) $this->config['limitreplies_number_wait_time'],
-			'LIMITREPLIES_SELECT_HINT_MODES'		=> $this->select_struct($this->config['limitreplies_select_hint_mode'], [
+			'LIMITREPLIES_SELECT_HINT_MODE_OPTS'	=> $this->select_struct($this->config['limitreplies_select_hint_mode'], [
 				['LIMITREPLIES_HINT_MODE_ONCLICK'	, 1],
 				['LIMITREPLIES_HINT_MODE_ALWAYS'	, 2],
 			]),

@@ -80,7 +80,7 @@ class listener implements EventSubscriberInterface
 		{
 			$this->template->assign_vars([
 				'S_QUICK_REPLY' 				=> false,
-				'LIMITREPLIES_MESSAGE' 			=> (string) $this->get_message($locked_until_time),
+				'LIMITREPLIES_MESSAGE' 			=> (string) $this->create_message($locked_until_time),
 				'LIMITREPLIES_SELECT_HINT_MODE'	=> (int) $this->config['limitreplies_select_hint_mode'],
 			]);
 		}
@@ -105,7 +105,7 @@ class listener implements EventSubscriberInterface
 
 		if ($locked_until_time)
 		{
-			trigger_error($this->get_message($locked_until_time));
+			trigger_error($this->create_message($locked_until_time));
 		}
 	}
 
@@ -167,16 +167,16 @@ class listener implements EventSubscriberInterface
 		)
 		{
 // var_dump('IF #1');
-			$last_unapproved_post_row = $this->get_last_unapproved_post($topic_data['topic_id'], $this->user->data['user_id']);
-// var_dump('last_unapproved_post_row', $last_unapproved_post_row !== null);
-// var_dump('unapproved:post_id', $last_unapproved_post_row['post_id'] ?? null);
-// var_dump('unapproved:post_time', $last_unapproved_post_row['post_time'] ?? null);
+			$last_unapproved_post = $this->get_last_unapproved_post($topic_data['topic_id'], $this->user->data['user_id']);
+// var_dump('last_unapproved_post_row', $last_unapproved_post !== null);
+// var_dump('unapproved:post_id', $last_unapproved_post['post_id'] ?? null);
+// var_dump('unapproved:post_time', $last_unapproved_post['post_time'] ?? null);
 
 			// Check if the timestamp of the user's last post in the queue is greater than the timestamp of the last visible post.
-			if ($last_unapproved_post_row !== null && $last_unapproved_post_row['post_time'] > $topic_data['topic_last_post_time'])
+			if ($last_unapproved_post !== null && $last_unapproved_post['post_time'] > $topic_data['topic_last_post_time'])
 			{
 // var_dump('IF #2');
-				$locked_until_time = $last_unapproved_post_row['post_time'] + $this->wait_time;
+				$locked_until_time = $last_unapproved_post['post_time'] + $this->wait_time;
 			}
 			// Check if the last visible post was from the same user.
 			else if ($topic_data['topic_last_poster_id'] == $this->user->data['user_id'])
@@ -196,7 +196,7 @@ class listener implements EventSubscriberInterface
 		return $locked_until_time > time() ? $locked_until_time : 0;
 	}
 
-	private function get_message(int $locked_until_time): string
+	private function create_message(int $locked_until_time): string
 	{
 		$this->language->add_lang('limitreplies', 'lukewcs/limitreplies');
 

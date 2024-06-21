@@ -1,3 +1,13 @@
+#### 1.0.0-rc1
+* Migration:
+  * Bei der Benutzer-Rolle "Funktionalitäten für neu registrierte Benutzer" wird das LMR Recht jetzt bei Installation auf Nie gesetzt. Also vorher b2 deinstallieren.
+* Mindestversion bei phpBB auf 3.3.2 erhöht, da in der Migration beim Permission Tool eine neue Funktion genutzt wird.
+* Foren Frontend:
+  * Statt bei der permanenten Anzeige eigenes CSS zu definieren, wird jetzt das Standard Post CSS verwendet. Dadurch funktioniert LMR bei möglichst vielen Styles, ohne das Anpassungen nötig wären. So wurde jetzt auch das meiste CSS überflüssig und wurde entfernt. [Vorschlag von Kirk (phpBB.de)]
+* Code Optimierung.
+* Sprachdateien:
+  * Texte überarbeitet.
+
 #### 1.0.0-b2
 * ACP Modul:
   * Den Schalter bei "Erklärung anzeigen" durch ein Auswahlmenü ersetzt, damit diese Einstellung intuitiver und gleichzeitig flexibler wird.
@@ -7,7 +17,7 @@
   * Funktion `select_struct` von FAR übernommen zum Bauen einer Select Struktur fürs Template.
 * Foren Frontend:
   * Bei der Klick-abhängigen Anzeige der Erklärung wird nicht mehr die bisherige Variante für die permanente Anzeige verwendet, sondern die phpBB Popup Funktion `phpbb.alert()`. Dadurch wurde es jetzt möglich, dass man auch bei den Zitat-Buttons die Erklärung anzeigen kann.
-  * Bei der permanenten Anzeige der Erklärung wird jetzt ein `not-allowed` Pointer bei den Antwort- und Zitat-Buttons verwendet. [Vorschlag von Udo]
+  * Bei der permanenten Anzeige der Erklärung wird jetzt ein `not-allowed` Pointer bei den Antwort- und Zitat-Buttons verwendet. [Vorschlag von Kirk (phpBB.de)]
 * Listener:
   * Generierung der Template Variable für den Erklärung-Modus wurde auf das neue Auswahlmenü umgestellt.
   * Bei `get_last_unapproved_post` werden jetzt nur noch relevante Felder aus der DB abgefragt, nicht mehr der komplette Datensatz des Beitrags.

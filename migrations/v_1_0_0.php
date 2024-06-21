@@ -48,8 +48,13 @@ class v_1_0_0 extends \phpbb\db\migration\migration
 			]],
 
 			['permission.add', ['u_limitreplies_bypass_lock']],
-			['permission.permission_set', ['ADMINISTRATORS'		, 'u_limitreplies_bypass_lock', 'group']],
-			['permission.permission_set', ['GLOBAL_MODERATORS'	, 'u_limitreplies_bypass_lock', 'group']],
+
+			['permission.permission_set', ['ADMINISTRATORS',	'u_limitreplies_bypass_lock', 'group']],
+			['permission.permission_set', ['GLOBAL_MODERATORS',	'u_limitreplies_bypass_lock', 'group']],
+			['if', [
+				['permission.role_exists',		['ROLE_USER_NEW_MEMBER']],
+				['permission.permission_set',	['ROLE_USER_NEW_MEMBER', 'u_limitreplies_bypass_lock', 'role', false]],
+			]],
 		];
 	}
 }

@@ -50,9 +50,9 @@ $lang = array_merge($lang, [
 	'LIMITREPLIES_WAIT_TIME_EXPLAIN'	=> 'Here you can specify after which waiting period a new reply is allowed in the topic if the last post was made by the same user. This value is also displayed in the explanation.',
 	'LIMITREPLIES_MINUTES'				=> 'minutes',
 	'LIMITREPLIES_HINT_MODE'			=> 'Show explanation',
-	'LIMITREPLIES_HINT_MODE_EXPLAIN'	=> 'With this selection you can specify how the explanation should be displayed when the lock is active. The “On click” option refers to the reply and quote buttons, where the explanation is displayed with the usual phpBB info popup. With the “Always” option, the explanation is permanently displayed below the reply buttons.',
-	'LIMITREPLIES_HINT_MODE_ONCLICK'	=> 'On click',
-	'LIMITREPLIES_HINT_MODE_ALWAYS'		=> 'Always',
+	'LIMITREPLIES_HINT_MODE_EXPLAIN'	=> 'Here you can specify how the explanation should be displayed when the lock is active. The “On click” option refers to the reply and quote buttons. With the “Always” option, the explanation is displayed below the reply buttons.',
+	'LIMITREPLIES_HINT_MODE_ONCLICK'	=> 'On click (as info popup)',
+	'LIMITREPLIES_HINT_MODE_ALWAYS'		=> 'Always (as info box)',
 
 	'LIMITREPLIES_MSG_SETTINGS_SAVED'	=> 'Limit Multiple Replies: Settings saved successfully',
 ]);
