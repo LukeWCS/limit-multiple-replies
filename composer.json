@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description" : "Forces a waiting period between two posts in a topic if the last post was from the same user. Posts in the topic’s moderation queue are also taken into account.",
 	"homepage": "https://github.com/LukeWCS/limit-multiple-replies",
-	"version": "1.0.0-rc2",
-	"time": "2024-06-22",
+	"version": "1.0.0",
+	"time": "2024-06-23",
 	"license": "GPL-2.0-only",
 	"authors": [
         {

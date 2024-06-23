@@ -1,5 +1,9 @@
+### 1.0.0
+* Release (2024-06-23)
+* Fix: Wenn die Wartezeit auf 1 Minute eingestellt war, dann wurde das als "1 Minuten" ausgegeben, weil die Plural-Funktion von `lang()` offensichtlich explizit einen Integer als Key benötigt, damit das funktioniert.
+
 #### 1.0.0-rc2
-* Fix: Die Situation Foren-Freigabe in Kombination mit normalen Benutzern - also keine NRUs - führte dazu, dass ein Benutzer beliebig viele Beiträge in die Warteschlange des Themas setzen konnte. Ursache war die unnötige Ermittlung, ob ein Benutzer ein NRU ist, denn nur bei einem NRU wurde die Warteschlange geprüft.
+* Fix: Die Situation Foren-Freigabe in Kombination mit normalen Benutzern - also keine NRUs - führte dazu, dass ein Benutzer beliebig viele Beiträge in die Warteschlange des Themas setzen konnte. Ursache war die unnötige Prüfung, ob ein Benutzer ein NRU ist, denn nur bei einem NRU wurde die Warteschlange geprüft.
 * Foren Frontend:
   * CSS erneut überarbeitet: Padding und Margin wieder reaktiviert und etwas angepasst, da es sonst bei bestimmten Styles zu einer sehr ungünstigen Darstellung bei der dauerhaften Info-Box kommen kann.
 

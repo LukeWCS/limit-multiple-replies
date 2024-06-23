@@ -62,9 +62,6 @@ class listener implements EventSubscriberInterface
 
 	public function set_template_vars($event): void
 	{
-// var_dump($event);
-// var_dump('set_template_vars');
-
 		if ($this->user->data['user_type'] == USER_IGNORE
 			|| $this->auth->acl_get('u_limitreplies_bypass_lock')
 			|| !$this->config['limitreplies_switch_enable']
@@ -88,9 +85,6 @@ class listener implements EventSubscriberInterface
 
 	public function check_posting($event): void
 	{
-// var_dump($event);
-// var_dump('check_posting');
-
 		if ($this->user->data['user_type'] == USER_IGNORE
 			|| !in_array($event['mode'], ['reply', 'quote', 'bump'])
 			|| $this->auth->acl_get('u_limitreplies_bypass_lock')
@@ -111,24 +105,7 @@ class listener implements EventSubscriberInterface
 
 	public function add_permissions($event): void
 	{
-		// $permissions = $event['permissions'];
-		// $permissions['u_limitreplies_bypass_lock'] = ['lang' => 'ACL_U_LIMITREPLIES_BYPASS_LOCK', 'cat' => 'post'];
-		// $event['permissions'] = $permissions;
-
 		$event->update_subarray('permissions', 'u_limitreplies_bypass_lock', ['lang' => 'ACL_U_LIMITREPLIES_BYPASS_LOCK', 'cat' => 'post']);
-	}
-
-	private function get_nru_group_id(): ?int
-	{
-		$sql = 'SELECT group_id
-				FROM ' . GROUPS_TABLE . '
-				WHERE group_name = "NEWLY_REGISTERED"
-					AND group_type = ' . GROUP_SPECIAL;
-		$result = $this->db->sql_query($sql, 86400);
-		$nru_group_id = $this->db->sql_fetchfield('group_id');
-		$this->db->sql_freeresult($result);
-
-		return $nru_group_id !== false ? $nru_group_id : null;
 	}
 
 	private function get_last_unapproved_post(int $topic_id, int $poster_id): ?array
@@ -148,51 +125,30 @@ class listener implements EventSubscriberInterface
 
 	private function get_lock_time(array $topic_data): int
 	{
-// var_dump('topic_status', $topic_data['topic_status']);
-// var_dump('topic_posts_unapproved', $topic_data['topic_posts_unapproved']);
-// var_dump('user_id', $this->user->data['user_id']);
-// var_dump('topic_id', $topic_data['topic_id']);
-
 		if (!function_exists('group_memberships'))
 		{
 			include($this->phpbb_root_path . 'includes/functions_user.' . $this->php_ext);
 		}
 
 		$locked_until_time = 0;
-		$nru_group_id = $this->get_nru_group_id();
 
-		// Check whether there are posts in the queue of the topic and the user is an NRU.
-		if ($topic_data['topic_posts_unapproved']
-			// && $nru_group_id !== null && group_memberships($nru_group_id, $this->user->data['user_id'], true)
-		)
+		// Check whether there are posts in the queue of the topic.
+		if ($topic_data['topic_posts_unapproved'])
 		{
-// var_dump('IF #1');
 			$last_unapproved_post = $this->get_last_unapproved_post($topic_data['topic_id'], $this->user->data['user_id']);
-// var_dump('last_unapproved_post_row', $last_unapproved_post !== null);
-// var_dump('unapproved:post_id', $last_unapproved_post['post_id'] ?? null);
-// var_dump('unapproved:post_time', $last_unapproved_post['post_time'] ?? null);
 
 			// Check if the timestamp of the user's last post in the queue is greater than the timestamp of the last visible post.
 			if ($last_unapproved_post !== null && $last_unapproved_post['post_time'] > $topic_data['topic_last_post_time'])
 			{
-// var_dump('IF #2');
 				$locked_until_time = $last_unapproved_post['post_time'] + $this->wait_time;
 			}
-			// Check if the last visible post was from the same user.
-			// else if ($topic_data['topic_last_poster_id'] == $this->user->data['user_id'])
-			// {
-// var_dump('IF #3');
-				// $locked_until_time = $topic_data['topic_last_post_time'] + $this->wait_time;
-			// }
 		}
+
 		// Check if the last visible post was from the same user.
-		// else if ($topic_data['topic_last_poster_id'] == $this->user->data['user_id'])
 		if ($locked_until_time == 0 && $topic_data['topic_last_poster_id'] == $this->user->data['user_id'])
 		{
-// var_dump('IF #4');
 			$locked_until_time = $topic_data['topic_last_post_time'] + $this->wait_time;
 		}
-// var_dump('get_lock_time', $locked_until_time);
 
 		return $locked_until_time > time() ? $locked_until_time : 0;
 	}
@@ -202,7 +158,7 @@ class listener implements EventSubscriberInterface
 		$this->language->add_lang('limitreplies', 'lukewcs/limitreplies');
 
 		return $this->language->lang('LIMITREPLIES_MSG_REPLY_DENIED',
-			$this->language->lang('LIMITREPLIES_MINUTES_PLURAL', $this->config['limitreplies_number_wait_time']),
+			$this->language->lang('LIMITREPLIES_MINUTES_PLURAL', (int) $this->config['limitreplies_number_wait_time']),
 			$this->user->format_date($locked_until_time)
 		);
 	}
