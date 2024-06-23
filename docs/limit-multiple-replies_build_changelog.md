@@ -1,3 +1,8 @@
+#### 1.0.0-rc2
+* Fix: Die Situation Foren-Freigabe in Kombination mit normalen Benutzern - also keine NRUs - führte dazu, dass ein Benutzer beliebig viele Beiträge in die Warteschlange des Themas setzen konnte. Ursache war die unnötige Ermittlung, ob ein Benutzer ein NRU ist, denn nur bei einem NRU wurde die Warteschlange geprüft.
+* Foren Frontend:
+  * CSS erneut überarbeitet: Padding und Margin wieder reaktiviert und etwas angepasst, da es sonst bei bestimmten Styles zu einer sehr ungünstigen Darstellung bei der dauerhaften Info-Box kommen kann.
+
 #### 1.0.0-rc1
 * Migration:
   * Bei der Benutzer-Rolle "Funktionalitäten für neu registrierte Benutzer" wird das LMR Recht jetzt bei Installation auf Nie gesetzt. Also vorher b2 deinstallieren.

@@ -163,7 +163,7 @@ class listener implements EventSubscriberInterface
 
 		// Check whether there are posts in the queue of the topic and the user is an NRU.
 		if ($topic_data['topic_posts_unapproved']
-			&& $nru_group_id !== null && group_memberships($nru_group_id, $this->user->data['user_id'], true)
+			// && $nru_group_id !== null && group_memberships($nru_group_id, $this->user->data['user_id'], true)
 		)
 		{
 // var_dump('IF #1');
@@ -179,14 +179,15 @@ class listener implements EventSubscriberInterface
 				$locked_until_time = $last_unapproved_post['post_time'] + $this->wait_time;
 			}
 			// Check if the last visible post was from the same user.
-			else if ($topic_data['topic_last_poster_id'] == $this->user->data['user_id'])
-			{
+			// else if ($topic_data['topic_last_poster_id'] == $this->user->data['user_id'])
+			// {
 // var_dump('IF #3');
-				$locked_until_time = $topic_data['topic_last_post_time'] + $this->wait_time;
-			}
+				// $locked_until_time = $topic_data['topic_last_post_time'] + $this->wait_time;
+			// }
 		}
 		// Check if the last visible post was from the same user.
-		else if ($topic_data['topic_last_poster_id'] == $this->user->data['user_id'])
+		// else if ($topic_data['topic_last_poster_id'] == $this->user->data['user_id'])
+		if ($locked_until_time == 0 && $topic_data['topic_last_poster_id'] == $this->user->data['user_id'])
 		{
 // var_dump('IF #4');
 			$locked_until_time = $topic_data['topic_last_post_time'] + $this->wait_time;
