@@ -1,3 +1,14 @@
+### 1.0.1
+* Release (2024-07-06)
+* Gründer sind jetzt generell ausgeschlossen.
+* Listener:
+  * Nicht mehr benötigten Code von 1.0.0-rc1 entfernt.
+  * Code Optimierung.
+* Foren-Template:
+  * Twig Code Optimierung.
+* JS:
+  * Objektname gemäss JS Richtlinien benannt.
+
 ### 1.0.0
 * Release (2024-06-23)
 * Fix: Wenn die Wartezeit auf 1 Minute eingestellt war, dann wurde das als "1 Minuten" ausgegeben, weil die Plural-Funktion von `lang()` offensichtlich explizit einen Integer als Key benötigt, damit das funktioniert.
@@ -18,13 +29,13 @@
   * Texte überarbeitet.
 
 #### 1.0.0-b2
-* ACP Modul:
+* ACP-Template:
   * Den Schalter bei "Erklärung anzeigen" durch ein Auswahlmenü ersetzt, damit diese Einstellung intuitiver und gleichzeitig flexibler wird.
   * Twig Makro `select()` von FAR übernommen, mit dem Auswahlmenüs in Templates einfacher und effizienter realisiert werden können.
-* ACP Controller:
-  * Controller an das neue Auswahlmenü angepasst.
+* ACP-Controller:
+  * An das neue Auswahlmenü angepasst.
   * Funktion `select_struct` von FAR übernommen zum Bauen einer Select Struktur fürs Template.
-* Foren Frontend:
+* Foren-Template:
   * Bei der Klick-abhängigen Anzeige der Erklärung wird nicht mehr die bisherige Variante für die permanente Anzeige verwendet, sondern die phpBB Popup Funktion `phpbb.alert()`. Dadurch wurde es jetzt möglich, dass man auch bei den Zitat-Buttons die Erklärung anzeigen kann.
   * Bei der permanenten Anzeige der Erklärung wird jetzt ein `not-allowed` Pointer bei den Antwort- und Zitat-Buttons verwendet. [Vorschlag von Kirk (phpBB.de)]
 * Listener:
@@ -42,7 +53,7 @@
 #### 1.0.0-b1
 * Erste interne Testversion.
 * Online Versionsprüfung bereits eingebaut und im Repo eingerichtet. Die VP zeigt jedoch während der Beta immer, dass die Version aktuell ist.
-* Änderungen/Neuerungen gegenüber "Deny double posts":
+* Änderungen/Neuerungen gegenüber "Deny double post":
   * Statt einem hardcodet Wert für die Anzahl Sekunden gibts jetzt ein ACP Modul mit paar Einstellungen.
   * Statt einem hardcodet Foren-Recht (Moderator Recht) gibt es jetzt ein eigenes Gruppen-Recht mit dem bei jeder Gruppe individuell festgelegt werden kann, ob sie die Sperre umgehen darf. Bei Admins und GlobMods ist das Recht per Standard bereits gesetzt. 
     * Gruppenrechte > Beiträge > Mehrfachantworten begrenzen: Kann Wartezeit umgehen
