@@ -5,5 +5,5 @@ Extension for phpBB - Forces a waiting period between two posts in a topic if th
 
 ### Requirements
 * phpBB 3.3.2 - 3.3.x
-* PHP 7.1.3 - 8.3.x
+* PHP 7.4.0 - 8.4.x
 
