@@ -8,7 +8,7 @@
 	* `get_lang_ver()`
 	* `lang_ver_check_msg()`
   * Code entsprechend angepasst.
-* ext.php`/`composer.json` angepasst:
+* `ext.php`/`composer.json` angepasst:
   * PHP: 7.1.3-8.3.x -> 7.4.0-8.4.x
 
 ### 1.0.1
