@@ -1,4 +1,5 @@
-{#
+<?php
+/**
 *
 * Limit Multiple Replies. An extension for the phpBB Forum Software package.
 *
@@ -8,13 +9,21 @@
 * Note: This extension is 100% genuine handcraft and consists of selected
 *       natural raw materials. There was no AI involved in making it.
 *
-#}
+*/
 
-{% set const = {
-	HINT_MODE_ONCLICK	: 1,
-	HINT_MODE_ALWAYS	: 2,
-} %}
+namespace lukewcs\limitreplies\migrations;
 
-{% if LIMITREPLIES_SELECT_HINT_MODE == const.HINT_MODE_ALWAYS %}
-	{% INCLUDE '@lukewcs_limitreplies/show_message.html' %}
-{% endif %}
+class v_1_1_0 extends \phpbb\db\migration\migration
+{
+	public static function depends_on()
+	{
+		return ['\lukewcs\limitreplies\migrations\v_1_0_0'];
+	}
+
+	public function update_data()
+	{
+		return [
+			['config.add', ['limitreplies_select_time_unit', 'minutes']],
+		];
+	}
+}

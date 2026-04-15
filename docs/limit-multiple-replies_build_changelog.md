@@ -1,3 +1,34 @@
+### 1.1.0
+* Release (2026-04-15)
+* Fix: Im ACP Modul konnte "Wartezeit zwischen zwei Beiträgen:" leer gespeichert werden.
+* Fix: Reponsive Regel hat bei `fieldset legend` nicht gegriffen.
+* PHP:
+  * Code verwendet jetzt 8.0 Features.
+  * Code strikter gestaltet.
+* ACP-Template:
+  * Auswahl für Wartezeit-Einheit eingebaut: Minuten, Sekunden und Tage.
+  * Toggle Control Schnittstelle für 1.3 angepasst und nicht mehr benötigen Twig Code entfernt.
+  * Aktualisierte Makros von Toggle Control 1.3.1 übernommen.
+    * `switch()`
+    * `notes()`
+* ACP-Controller:
+  * Auswahl der Wartezeit-Einheit verdrahtet.
+  * Neue Funktionen von Force Account Reactivation 1.1.4 übernommen:
+    * `min_max()`
+* JS:
+  * JavaScript Datei von Toggle Control 1.3.1 für das ACP Modul übernommen zum Ausblenden von Optionsgruppen, wenn Ext deaktiviert ist.
+* CSS:
+  * Auf Nested CSS umgestellt.
+  * Kirk-Toggles auf 2.0 aktualisiert.
+* `ext.php`/`composer.json` angepasst:
+  * PHP: 8.0.0 - 8.5.x (Bisher: 7.4.0 - 8.4.x)
+* Code Optimierung bei PHP und Twig.
+* Neue Migration:
+  * Konfig Variable `limitreplies_select_time_unit` hinzugefügt.
+* Sprachdateien:
+  * 4 neue Variablen für Stunden/Tage und Plurals.
+  * 2 Variablen umbenannt.
+
 ### 1.0.2
 * Release (2024-12-13)
 * PHP:
